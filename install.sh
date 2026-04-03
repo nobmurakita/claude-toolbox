@@ -21,6 +21,12 @@ curl -fsSL "$REPO/skills/python-sandbox/SKILL.md" \
   -o ~/.claude/skills/python-sandbox/SKILL.md
 echo "✅ SKILL.md をインストールしました"
 
+# 実行スクリプトをインストール
+curl -fsSL "$REPO/skills/python-sandbox/scripts/python-sandbox" \
+  -o ~/.claude/skills/python-sandbox/scripts/python-sandbox
+chmod +x ~/.claude/skills/python-sandbox/scripts/python-sandbox
+echo "✅ python-sandbox スクリプトをインストールしました"
+
 # Dockerfile をインストール
 mkdir -p ~/.claude-python-sandbox
 curl -fsSL "$REPO/docker/Dockerfile" \

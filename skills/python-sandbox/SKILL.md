@@ -17,53 +17,28 @@ description: プロジェクトのコード実行ではなく、一時的なPyth
 
 ## 実行コマンド
 
+標準入力でコードを渡す:
 ```bash
-docker run --rm -i \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
-  python-sandbox \
-  python - <<'PYTHON'
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox <<'PYTHON'
 print("Hello")
 PYTHON
 ```
 
-## ファイル入出力が必要な場合
-
+スクリプトファイルを実行する:
 ```bash
-docker run --rm -i \
-  -v "$(pwd)":/workspace \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
-  python-sandbox \
-  python - <<'PYTHON'
-import pandas as pd
-df = pd.read_csv("/workspace/data.csv")
-df.to_excel("/workspace/output.xlsx", index=False)
-PYTHON
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox script.py input.csv output.xlsx
 ```
 
-## スクリプトファイルを渡す場合
-
+追加ライブラリが必要な場合:
 ```bash
-docker run --rm \
-  -v "$(pwd)":/workspace \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
-  python-sandbox \
-  python script.py input.csv output.xlsx
-```
-
-## 追加ライブラリが必要な場合
-
-```bash
-docker run --rm -i \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
-  python-sandbox \
-  bash -c "pip install <ライブラリ名> && python -" <<'PYTHON'
-print("Hello")
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox --pip requests <<'PYTHON'
+import requests
+print(requests.get("https://example.com").status_code)
 PYTHON
 ```
 
 ## ルール
 
 - コードは標準入力（ヒアドキュメント）で渡し、スクリプトファイルを作成しない
-- ファイル入出力が必要な場合のみ `-v "$(pwd)":/workspace` をマウントする
 - 追加インストールしたライブラリは `claude-python-sandbox-packages` ボリュームに永続化される
 - プロジェクト自体のコード実行にはこのスキルを使わない

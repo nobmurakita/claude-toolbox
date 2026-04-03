@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+PACKAGES_VOLUME="claude-python-sandbox-packages"
+SITE_PACKAGES="/usr/local/lib/python3.14/site-packages"
+IMAGE="python-sandbox"
+
+# pip インストールするパッケージを収集
+PIP_PACKAGES=()
+while [[ "$1" == "--pip" ]]; do
+  shift
+  PIP_PACKAGES+=("$1")
+  shift
+done
+
+DOCKER_OPTS=(--rm -i -v "$(pwd)":/workspace -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
+
+if [[ ${#PIP_PACKAGES[@]} -gt 0 ]]; then
+  PIP_CMD="pip install -q ${PIP_PACKAGES[*]} &&"
+else
+  PIP_CMD=""
+fi
+
+if [[ $# -gt 0 ]]; then
+  # ファイル実行
+  docker run "${DOCKER_OPTS[@]}" "$IMAGE" bash -c "$PIP_CMD python \$@" -- "$@"
+else
+  # 標準入力
+  docker run "${DOCKER_OPTS[@]}" "$IMAGE" bash -c "$PIP_CMD python -"
+fi
