@@ -37,6 +37,13 @@ print(requests.get("https://example.com").status_code)
 PYTHON
 ```
 
+## 日本語フォント
+
+コンテナには Noto Sans CJK がインストール済み。matplotlibで日本語を使う場合:
+```python
+matplotlib.rcParams['font.family'] = 'Noto Sans CJK JP'
+```
+
 ## ルール
 
 - コードは標準入力（ヒアドキュメント）で渡し、スクリプトファイルを作成しない

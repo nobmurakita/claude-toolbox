@@ -27,6 +27,8 @@ Claude Code から `/python-sandbox` で呼び出せます。
   - openpyxl, xlsxwriter, lxml, python-pptx, pdfplumber
 - 画像・可視化
   - pillow, matplotlib, seaborn
+- 日本語フォント
+  - Noto Sans CJK
 - Web・スクレイピング
   - requests, beautifulsoup4
 - テキスト・テンプレート
