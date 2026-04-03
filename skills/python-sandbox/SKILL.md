@@ -11,6 +11,10 @@ description: プロジェクトのコード実行ではなく、一時的なPyth
 
 プロジェクト自体のコード（テスト、lint、アプリ起動など）はプロジェクトの環境で実行する。
 
+`/python-sandbox` に引数が渡された場合: $ARGUMENTS
+- `.py` ファイルパスで始まる場合 → そのファイルをコンテナで実行する（後続の引数はスクリプトの引数として渡す）
+- それ以外の場合 → タスクの指示として解釈し、コードを書いて実行する
+
 ## 実行コマンド
 
 ```bash
@@ -34,6 +38,16 @@ import pandas as pd
 df = pd.read_csv("/workspace/data.csv")
 df.to_excel("/workspace/output.xlsx", index=False)
 PYTHON
+```
+
+## スクリプトファイルを渡す場合
+
+```bash
+docker run --rm \
+  -v "$(pwd)":/workspace \
+  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
+  python-sandbox \
+  python script.py input.csv output.xlsx
 ```
 
 ## 追加ライブラリが必要な場合
