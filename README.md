@@ -28,7 +28,7 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-python-sandbox/m
 - スプレッドシート・ドキュメント
   - openpyxl, xlsxwriter, lxml, python-pptx, pdfplumber
 - 画像・可視化
-  - pillow, matplotlib, seaborn
+  - pillow, matplotlib, seaborn, plotly, kaleido
 - 日本語フォント
   - Noto Sans CJK
 - Web・スクレイピング

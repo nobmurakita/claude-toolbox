@@ -9,7 +9,7 @@ RUN pip install --no-cache-dir \
     # スプレッドシート・ドキュメント
     openpyxl xlsxwriter lxml python-pptx pdfplumber \
     # 画像・可視化
-    pillow matplotlib seaborn \
+    pillow matplotlib seaborn plotly kaleido \
     # Web・スクレイピング
     requests beautifulsoup4 \
     # テキスト・テンプレート
