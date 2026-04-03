@@ -32,7 +32,7 @@ Claude Code から `/python-sandbox` で呼び出せます。
 - テキスト・テンプレート
   - jinja2, pyyaml, tabulate, chardet
 
-追加ライブラリは都度インストールでき、`claude-python-sandbox-packages` ボリュームに永続化されます。
+追加ライブラリは都度インストールでき、`python-sandbox-packages` ボリュームに永続化されます。
 
 ## 構成
 

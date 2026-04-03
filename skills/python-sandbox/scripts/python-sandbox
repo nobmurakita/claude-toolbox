@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-PACKAGES_VOLUME="claude-python-sandbox-packages"
+PACKAGES_VOLUME="python-sandbox-packages"
 SITE_PACKAGES="/usr/local/lib/python3.14/site-packages"
 IMAGE="python-sandbox"
 
