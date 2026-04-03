@@ -24,15 +24,16 @@ print("Hello")
 PYTHON
 ```
 
-スクリプトファイルを実行する:
+スクリプトファイルを実行する（ファイルはカレントディレクトリからの相対パスで指定する）:
 ```bash
 ${CLAUDE_SKILL_DIR}/scripts/python-sandbox script.py input.csv output.xlsx
 ```
 
-追加ライブラリが必要な場合:
+追加ライブラリが必要な場合（`--pip` は1パッケージずつ指定する）:
 ```bash
-${CLAUDE_SKILL_DIR}/scripts/python-sandbox --pip requests <<'PYTHON'
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox --pip requests --pip beautifulsoup4 <<'PYTHON'
 import requests
+from bs4 import BeautifulSoup
 print(requests.get("https://example.com").status_code)
 PYTHON
 ```
