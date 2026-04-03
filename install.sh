@@ -29,7 +29,7 @@ echo "✅ Dockerfile をインストールしました"
 
 # Dockerイメージをビルド
 echo "🐳 Dockerイメージをビルドしています..."
-docker buildx build -t python-sandbox ~/.claude-python-sandbox
+docker buildx build --tag python-sandbox ~/.claude-python-sandbox
 echo "✅ Dockerイメージをビルドしました"
 
 echo "🎉 インストール完了！"
