@@ -5,6 +5,14 @@ PACKAGES_VOLUME="python-sandbox-packages"
 SITE_PACKAGES="/usr/local/lib/python3.14/site-packages"
 IMAGE="python-sandbox"
 
+DOCKER_OPTS=(--rm -i -v "$(pwd)":/workspace -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
+
+# pip list
+if [[ "$1" == "--list" ]]; then
+  docker run "${DOCKER_OPTS[@]}" "$IMAGE" pip list
+  exit 0
+fi
+
 # pip インストールするパッケージを収集
 PIP_PACKAGES=()
 while [[ "$1" == "--pip" ]]; do
@@ -12,8 +20,6 @@ while [[ "$1" == "--pip" ]]; do
   PIP_PACKAGES+=("$1")
   shift
 done
-
-DOCKER_OPTS=(--rm -i -v "$(pwd)":/workspace -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
 
 if [[ ${#PIP_PACKAGES[@]} -gt 0 ]]; then
   PIP_CMD="pip install -q ${PIP_PACKAGES[*]} &&"

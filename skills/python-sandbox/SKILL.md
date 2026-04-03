@@ -37,6 +37,13 @@ print(requests.get("https://example.com").status_code)
 PYTHON
 ```
 
+## プリインストール済みパッケージ
+
+`--pip` を使う前に、既にインストール済みか確認すること:
+```bash
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox --list
+```
+
 ## 日本語フォント
 
 コンテナには Noto Sans CJK がインストール済み。matplotlibで日本語を使う場合:
