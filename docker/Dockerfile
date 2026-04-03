@@ -1,4 +1,4 @@
-FROM python:3.13-slim
+FROM python:3.14-slim
 RUN pip install --no-cache-dir \
     # データ処理・計算
     pandas numpy scipy \

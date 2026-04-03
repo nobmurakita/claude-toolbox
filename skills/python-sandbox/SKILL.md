@@ -16,7 +16,7 @@ description: プロジェクトのコード実行ではなく、一時的なPyth
 ```bash
 docker run --rm \
   -v "$(pwd)":/workspace \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.13/site-packages \
+  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
   python-sandbox \
   python script.py
 ```
@@ -26,7 +26,7 @@ docker run --rm \
 ```bash
 docker run --rm \
   -v "$(pwd)":/workspace \
-  -v claude-python-sandbox-packages:/usr/local/lib/python3.13/site-packages \
+  -v claude-python-sandbox-packages:/usr/local/lib/python3.14/site-packages \
   python-sandbox \
   bash -c "pip install <ライブラリ名> && python script.py"
 ```
