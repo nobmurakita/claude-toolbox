@@ -12,7 +12,9 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-python-sandbox/m
 
 ## 使い方
 
-Claude Code から `/python-sandbox` で呼び出せます。
+一時的なPython作業が必要な場面で Claude Code が自動的にこのスキルを使用します。
+
+スラッシュコマンドで明示的に呼び出すこともできます:
 
 ```
 /python-sandbox CSVをExcelに変換して
