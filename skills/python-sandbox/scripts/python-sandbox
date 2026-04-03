@@ -7,12 +7,6 @@ IMAGE="python-sandbox"
 
 DOCKER_OPTS=(--rm -i -v "$(pwd)":/workspace -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
 
-# pip list
-if [[ "$1" == "--list" ]]; then
-  docker run "${DOCKER_OPTS[@]}" "$IMAGE" pip list
-  exit 0
-fi
-
 # pip インストールするパッケージを収集
 PIP_PACKAGES=()
 while [[ "$1" == "--pip" ]]; do
