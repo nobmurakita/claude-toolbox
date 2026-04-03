@@ -22,6 +22,7 @@ curl -fsSL "$REPO/skills/python-sandbox/SKILL.md" \
 echo "✅ SKILL.md をインストールしました"
 
 # 実行スクリプトをインストール
+mkdir -p ~/.claude/skills/python-sandbox/scripts
 curl -fsSL "$REPO/skills/python-sandbox/scripts/python-sandbox" \
   -o ~/.claude/skills/python-sandbox/scripts/python-sandbox
 chmod +x ~/.claude/skills/python-sandbox/scripts/python-sandbox
