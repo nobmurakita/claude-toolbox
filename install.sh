@@ -17,13 +17,13 @@ echo "📦 claude-python-sandbox をインストールします..."
 
 # SKILL.md をインストール
 mkdir -p ~/.claude/skills/python-sandbox
-curl -fsSL "$REPO/skills/python-sandbox/SKILL.md" \
+curl -fsSL -H "Cache-Control: no-cache" "$REPO/skills/python-sandbox/SKILL.md" \
   -o ~/.claude/skills/python-sandbox/SKILL.md
 echo "✅ SKILL.md をインストールしました"
 
 # Dockerfile をインストール
 mkdir -p ~/.claude-python-sandbox
-curl -fsSL "$REPO/docker/Dockerfile" \
+curl -fsSL -H "Cache-Control: no-cache" "$REPO/docker/Dockerfile" \
   -o ~/.claude-python-sandbox/Dockerfile
 echo "✅ Dockerfile をインストールしました"
 
