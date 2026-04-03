@@ -28,18 +28,15 @@ curl -fsSL "$REPO/skills/python-sandbox/scripts/python-sandbox" \
 chmod +x ~/.claude/skills/python-sandbox/scripts/python-sandbox
 echo "✅ python-sandbox スクリプトをインストールしました"
 
-# Dockerfile をインストール
-mkdir -p ~/.claude-python-sandbox
-curl -fsSL "$REPO/docker/Dockerfile" \
-  -o ~/.claude-python-sandbox/Dockerfile
-echo "✅ Dockerfile をインストールしました"
-
 # Dockerイメージをビルド
 echo "🐳 Dockerイメージをビルドしています..."
+TMPDIR=$(mktemp -d)
+trap "rm -rf $TMPDIR" EXIT
+curl -fsSL "$REPO/docker/Dockerfile" -o "$TMPDIR/Dockerfile"
 if docker buildx version &> /dev/null; then
-  docker buildx build -t python-sandbox ~/.claude-python-sandbox
+  docker buildx build -t python-sandbox "$TMPDIR"
 else
-  docker build -t python-sandbox ~/.claude-python-sandbox
+  docker build -t python-sandbox "$TMPDIR"
 fi
 echo "✅ Dockerイメージをビルドしました"
 
