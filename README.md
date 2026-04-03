@@ -1,13 +1,22 @@
 # python-sandbox
 
-Claude Code で Python を使った一時的な分析作業を Docker コンテナで実行するスキルです。
+Claude Code で Python を使った一時的な作業を Docker コンテナで実行するスキルです。
 
-システムの Python や仮想環境を汚さず、隔離された環境で分析作業を行います。
+システムの Python やプロジェクトの仮想環境を汚さず、隔離された環境で実行します。
 
 ## インストール
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-python-sandbox/main/install.sh | bash
+```
+
+## 使い方
+
+Claude Code から `/python-sandbox` で呼び出せます。
+
+```
+/python-sandbox CSVをExcelに変換して
+/python-sandbox script.py input.csv output.xlsx
 ```
 
 ## 含まれるライブラリ
@@ -32,7 +41,9 @@ claude-python-sandbox/
 ├── install.sh
 ├── skills/
 │   └── python-sandbox/
-│       └── SKILL.md
+│       ├── SKILL.md
+│       └── scripts/
+│           └── python-sandbox
 └── docker/
     └── Dockerfile
 ```
