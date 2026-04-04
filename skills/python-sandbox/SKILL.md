@@ -38,6 +38,12 @@ print(requests.get("https://example.com").status_code)
 PYTHON
 ```
 
+## ファイルパスの注意
+
+ホストのカレントディレクトリ（`$(pwd)`）がコンテナ内の `/workspace` にマウントされる。
+コード内でファイルを読み書きする場合は **`/workspace/ファイル名`** を使うこと。
+ホスト側の絶対パス（例: `/Users/.../file.csv`）はコンテナ内に存在しないため使えない。
+
 ## 日本語フォント
 
 コンテナには Noto Sans CJK がインストール済み。matplotlibで日本語を使う場合:
