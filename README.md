@@ -37,7 +37,7 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-toolbox/main/ins
 - **グラフ描画**: graphviz (dot, neato, etc.)
 - **データベース**: sqlite3
 - **フォント**: Noto Sans CJK
-- **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
+- **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, openpyxl, xlsxwriter, python-pptx, lxml, pdfplumber, pikepdf, pymupdf, reportlab, weasyprint, pillow, matplotlib, seaborn, plotly, kaleido, requests, beautifulsoup4, jinja2, pyyaml, tabulate, chardet, markdown, rich
 - **Node.js 24**: nodejs, npm
 
 ## イメージの再構築

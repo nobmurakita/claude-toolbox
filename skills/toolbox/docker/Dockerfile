@@ -33,7 +33,9 @@ RUN pip install --no-cache-dir \
     # データ処理・計算
     pandas numpy scipy \
     # スプレッドシート・ドキュメント
-    openpyxl xlsxwriter lxml python-pptx pdfplumber \
+    openpyxl xlsxwriter lxml python-pptx \
+    # PDF
+    pdfplumber pikepdf pymupdf reportlab weasyprint \
     # 画像・可視化
     pillow matplotlib seaborn plotly kaleido \
     # Web・スクレイピング
