@@ -25,8 +25,10 @@ echo "✅ SKILL.md をインストールしました"
 mkdir -p ~/.claude/skills/toolbox/scripts
 curl -fsSL "$REPO/skills/toolbox/scripts/toolbox" \
   -o ~/.claude/skills/toolbox/scripts/toolbox
-chmod +x ~/.claude/skills/toolbox/scripts/toolbox
-echo "✅ toolbox スクリプトをインストールしました"
+curl -fsSL "$REPO/skills/toolbox/scripts/rebuild" \
+  -o ~/.claude/skills/toolbox/scripts/rebuild
+chmod +x ~/.claude/skills/toolbox/scripts/toolbox ~/.claude/skills/toolbox/scripts/rebuild
+echo "✅ スクリプトをインストールしました"
 
 # Dockerfile をインストール
 mkdir -p ~/.claude/skills/toolbox/docker
