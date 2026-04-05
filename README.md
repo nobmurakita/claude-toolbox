@@ -1,53 +1,46 @@
-# python-sandbox
+# sandbox-tools
 
-Claude Code で Python を使った一時的な作業を Docker コンテナで実行するスキルです。
+Claude Code でローカル環境を汚さずにツールやスクリプトを実行するスキルです。
 
-システムの Python やプロジェクトの仮想環境を汚さず、隔離された環境で実行します。
+Python、PDF操作、画像変換、データ処理など、Docker コンテナで隔離して実行します。
 
 ## インストール
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-python-sandbox/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-sandbox-tools/main/install.sh | bash
 ```
 
 ## 使い方
 
-一時的なPython作業が必要な場面で Claude Code が自動的にこのスキルを使用します。
+必要な場面で Claude Code が自動的にこのスキルを使用します。
 
 スラッシュコマンドで明示的に呼び出すこともできます:
 
 ```
-/python-sandbox CSVをExcelに変換して
-/python-sandbox script.py input.csv output.xlsx
+/sandbox-tools CSVをExcelに変換して
+/sandbox-tools script.py input.csv output.xlsx
 ```
 
-## 含まれるライブラリ
+## プリインストール済みツール
 
-- データ処理・計算
-  - pandas, numpy, scipy
-- スプレッドシート・ドキュメント
-  - openpyxl, xlsxwriter, lxml, python-pptx, pdfplumber
-- 画像・可視化
-  - pillow, matplotlib, seaborn, plotly, kaleido
-- 日本語フォント
-  - Noto Sans CJK
-- Web・スクレイピング
-  - requests, beautifulsoup4
-- テキスト・テンプレート
-  - jinja2, pyyaml, tabulate, chardet
+- **Python 3**: pandas, numpy, scipy, matplotlib, seaborn, plotly, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, kaleido
+- **PDF**: poppler-utils (pdftotext, pdfimages, pdftoppm), ghostscript, qpdf
+- **画像・動画**: ffmpeg, imagemagick
+- **基本ツール**: curl, wget, jq, git, zip, unzip, file
+- **フォント**: Noto Sans CJK
 
-追加ライブラリは都度インストールでき、`python-sandbox-packages` ボリュームに永続化されます。
+追加ツールは `--commit` オプションで永続的にインストールできます。
 
 ## 構成
 
 ```
-claude-python-sandbox/
+claude-sandbox-tools/
 ├── install.sh
 ├── skills/
-│   └── python-sandbox/
+│   └── sandbox-tools/
 │       ├── SKILL.md
 │       └── scripts/
-│           └── python-sandbox
+│           └── sandbox-tools
 └── docker/
     └── Dockerfile
 ```

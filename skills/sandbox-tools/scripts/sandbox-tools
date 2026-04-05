@@ -1,0 +1,35 @@
+#!/bin/bash
+set -e
+
+IMAGE="sandbox-tools"
+
+# オプションを収集
+COMMIT=false
+DOCKER_OPTS=()
+DIR_COUNT=0
+while [[ "$1" == --* ]]; do
+  case "$1" in
+    --commit)
+      COMMIT=true
+      shift
+      ;;
+    --dir)
+      shift
+      DIR_COUNT=$((DIR_COUNT + 1))
+      DOCKER_OPTS+=(-v "$1:/work/dir${DIR_COUNT}")
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
+done
+
+if [[ "$COMMIT" == true ]]; then
+  CONTAINER="sandbox-tools-$$"
+  docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
+  docker commit "$CONTAINER" "$IMAGE"
+  docker rm "$CONTAINER"
+else
+  docker run --rm -i -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
+fi
