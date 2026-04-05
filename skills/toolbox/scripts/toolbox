@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 IMAGE="claude-toolbox"
 
@@ -7,7 +7,7 @@ IMAGE="claude-toolbox"
 COMMIT=false
 DOCKER_OPTS=()
 DIR_COUNT=0
-while [[ "$1" == --* ]]; do
+while [[ "${1:-}" == --* ]]; do
   case "$1" in
     --commit)
       COMMIT=true
@@ -15,8 +15,13 @@ while [[ "$1" == --* ]]; do
       ;;
     --dir)
       shift
+      DIR_PATH="${1:?--dir にはパスを指定してください}"
+      if [[ ! -d "$DIR_PATH" ]]; then
+        echo "エラー: ディレクトリが存在しません: $DIR_PATH" >&2
+        exit 1
+      fi
       DIR_COUNT=$((DIR_COUNT + 1))
-      DOCKER_OPTS+=(-v "$1:/work/dir${DIR_COUNT}")
+      DOCKER_OPTS+=(-v "$DIR_PATH:/work/dir${DIR_COUNT}")
       shift
       ;;
     *)
@@ -26,7 +31,7 @@ while [[ "$1" == --* ]]; do
 done
 
 if [[ "$COMMIT" == true ]]; then
-  CONTAINER="toolbox-$$"
+  CONTAINER="toolbox-$(head -c8 /dev/urandom | od -An -tx1 | tr -d ' \n')"
   docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
   docker commit "$CONTAINER" "$IMAGE"
   docker rm "$CONTAINER"
