@@ -24,7 +24,8 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-toolbox/main/ins
 
 ```
 /toolbox CSVをExcelに変換して
-/toolbox script.py input.csv output.xlsx
+/toolbox python3 script.py input.csv output.xlsx
+/toolbox cowsayをインストール
 ```
 
 ## プリインストール済みツール
@@ -38,8 +39,6 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-toolbox/main/ins
 - **フォント**: Noto Sans CJK
 - **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
 - **Node.js 24**: nodejs, npm
-
-追加ツールは `--commit` オプションで永続的にインストールできます。
 
 ## イメージの再構築
 
