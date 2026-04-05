@@ -42,8 +42,8 @@ fi
 if [[ "$COMMIT" == true ]]; then
   CONTAINER="toolbox-$(head -c8 /dev/urandom | od -An -tx1 | tr -d ' \n')"
   trap 'docker rm "$CONTAINER" 2>/dev/null' EXIT
-  docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
+  docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
   docker commit "$CONTAINER" "$IMAGE"
 else
-  docker run --rm -i -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
+  docker run --rm -i -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
 fi

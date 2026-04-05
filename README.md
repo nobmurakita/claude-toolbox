@@ -35,6 +35,13 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-toolbox/main/ins
 
 追加ツールは `--commit` オプションで永続的にインストールできます。
 
+## アンインストール
+
+```bash
+rm -rf ~/.claude/skills/toolbox
+docker rmi claude-toolbox
+```
+
 ## 構成
 
 ```
