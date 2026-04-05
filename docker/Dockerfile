@@ -8,10 +8,8 @@ ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/game
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # Python
     python3 python3-pip \
-    # Node.js
-    nodejs npm \
     # 基本ツール
-    curl wget jq git \
+    ca-certificates curl wget jq git gnupg \
     # PDF
     poppler-utils ghostscript qpdf \
     # 画像・動画
@@ -28,6 +26,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tree \
     # その他
     zip unzip file \
+    && rm -rf /var/lib/apt/lists/*
+
+# Node.js 24
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
+    && apt-get install -y --no-install-recommends nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --no-cache-dir \

@@ -31,7 +31,7 @@ echo "✅ toolbox スクリプトをインストールしました"
 # Dockerイメージをビルド
 echo "🐳 Dockerイメージをビルドしています..."
 TMPDIR=$(mktemp -d)
-trap "rm -rf $TMPDIR" EXIT
+trap 'rm -rf "$TMPDIR"' EXIT
 curl -fsSL "$REPO/docker/Dockerfile" -o "$TMPDIR/Dockerfile"
 if docker buildx version &> /dev/null; then
   docker buildx build -t claude-toolbox "$TMPDIR"

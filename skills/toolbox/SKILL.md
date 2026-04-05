@@ -3,7 +3,6 @@ name: toolbox
 description: 一時的な作業でローカル環境にないツールをDockerコンテナで実行する。Python、PDF操作、画像変換、データ処理、スクレイピングなど用途を問わない。
 allowed-tools:
   - Bash(*/.claude/skills/toolbox/scripts/toolbox *)
-  - Bash(docker *)
 ---
 
 # Toolbox
@@ -16,14 +15,14 @@ allowed-tools:
 
 ベースイメージ: Ubuntu 24.04
 
-- **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
+- **基本ツール**: curl, wget, jq, git, zip, unzip, file, tree
 - **PDF**: poppler-utils (pdftotext, pdfimages, pdftoppm), ghostscript, qpdf
 - **画像・動画**: ffmpeg, imagemagick, rsvg-convert (librsvg)
 - **ドキュメント変換**: pandoc
 - **グラフ描画**: graphviz (dot, neato, etc.)
 - **データベース**: sqlite3
-- **Node.js**: nodejs, npm
-- **基本ツール**: curl, wget, jq, git, zip, unzip, file, tree
+- **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
+- **Node.js 24**: nodejs, npm
 
 ## 実行コマンド
 
@@ -34,7 +33,7 @@ ${CLAUDE_SKILL_DIR}/scripts/toolbox [--dir <path>]... [--root] [--commit] <comma
 - `--dir <path>`: 追加ディレクトリをマウントする（指定順に `/work/dir1`, `/work/dir2`, ...）
 - `--root`: root 権限で実行する（パッケージのインストール等に必要）
 - `--commit`: コマンド実行後にイメージを更新する（docker commit）
-- 上記以外の引数はそのまま `docker run` に渡される
+
 
 実行例:
 ```bash

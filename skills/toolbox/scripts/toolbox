@@ -35,8 +35,13 @@ while [[ "${1:-}" == --* ]]; do
       COMMIT=true
       shift
       ;;
-    *)
+    --)
+      shift
       break
+      ;;
+    *)
+      echo "エラー: 不明なオプション: $1" >&2
+      exit 1
       ;;
   esac
 done
@@ -48,8 +53,12 @@ fi
 if [[ "$COMMIT" == true ]]; then
   CONTAINER="toolbox-$(head -c8 /dev/urandom | od -An -tx1 | tr -d ' \n')"
   trap 'docker rm "$CONTAINER" 2>/dev/null' EXIT
-  docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
-  docker commit "$CONTAINER" "$IMAGE"
+  if docker run -i --name "$CONTAINER" -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"; then
+    docker commit "$CONTAINER" "$IMAGE"
+  else
+    echo "エラー: コマンドが失敗したためイメージを更新しません" >&2
+    exit 1
+  fi
 else
   docker run --rm -i -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
 fi
