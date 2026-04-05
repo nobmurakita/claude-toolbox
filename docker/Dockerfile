@@ -16,4 +16,4 @@ RUN pip install --no-cache-dir \
     jinja2 pyyaml tabulate chardet
 RUN useradd -m sandbox && chown -R sandbox /usr/local/lib/python3.14/site-packages
 USER sandbox
-WORKDIR /workspace
+WORKDIR /work/pwd

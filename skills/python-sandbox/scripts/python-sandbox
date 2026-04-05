@@ -5,14 +5,28 @@ PACKAGES_VOLUME="python-sandbox-packages"
 SITE_PACKAGES="/usr/local/lib/python3.14/site-packages"
 IMAGE="python-sandbox"
 
-DOCKER_OPTS=(--rm -i -v "$(pwd)":/workspace -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
+DOCKER_OPTS=(--rm -i -v "$(pwd):/work/pwd" -v "$PACKAGES_VOLUME:$SITE_PACKAGES")
 
-# pip インストールするパッケージを収集
+# オプションを収集
 PIP_PACKAGES=()
-while [[ "$1" == "--pip" ]]; do
-  shift
-  PIP_PACKAGES+=("$1")
-  shift
+DIR_COUNT=0
+while [[ "$1" == --* ]]; do
+  case "$1" in
+    --pip)
+      shift
+      PIP_PACKAGES+=("$1")
+      shift
+      ;;
+    --dir)
+      shift
+      DIR_COUNT=$((DIR_COUNT + 1))
+      DOCKER_OPTS+=(-v "$1:/work/dir${DIR_COUNT}")
+      shift
+      ;;
+    *)
+      break
+      ;;
+  esac
 done
 
 if [[ ${#PIP_PACKAGES[@]} -gt 0 ]]; then

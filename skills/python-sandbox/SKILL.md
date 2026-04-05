@@ -40,9 +40,19 @@ PYTHON
 
 ## ファイルパスの注意
 
-ホストのカレントディレクトリ（`$(pwd)`）がコンテナ内の `/workspace` にマウントされる。
-コンテナの作業ディレクトリは最初から `/workspace` なので、相対パスでそのままアクセスできる。
 ホスト側の絶対パス（例: `/Users/.../file.csv`）はコンテナ内に存在しないため使えない。
+
+カレントディレクトリは常に `/work/pwd` にマウントされる。
+コンテナの作業ディレクトリは `/work/pwd` なので、相対パスでそのままアクセスできる。
+
+カレントディレクトリ外のファイルを扱う場合は `--dir` で追加マウントする（指定順に `/work/dir1`, `/work/dir2`, ...）:
+```bash
+${CLAUDE_SKILL_DIR}/scripts/python-sandbox --dir /path/to/input --dir /path/to/output <<'PYTHON'
+import pandas as pd
+df = pd.read_csv("/work/dir1/data.csv")
+df.to_excel("/work/dir2/result.xlsx")
+PYTHON
+```
 
 ## 日本語フォント
 
