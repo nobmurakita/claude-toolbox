@@ -21,6 +21,7 @@ allowed-tools:
 - **ドキュメント変換**: pandoc
 - **グラフ描画**: graphviz (dot, neato, etc.)
 - **データベース**: sqlite3
+- **フォント**: Noto Sans CJK
 - **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
 - **Node.js 24**: nodejs, npm
 

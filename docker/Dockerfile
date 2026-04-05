@@ -6,26 +6,22 @@ ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Python
-    python3 python3-pip \
     # 基本ツール
-    ca-certificates curl wget jq git gnupg \
+    ca-certificates curl wget jq git gnupg zip unzip file tree \
     # PDF
     poppler-utils ghostscript qpdf \
     # 画像・動画
     ffmpeg imagemagick librsvg2-bin \
-    # フォント
-    fonts-noto-cjk \
     # ドキュメント変換
     pandoc \
     # グラフ描画
     graphviz \
     # データベース
     sqlite3 \
-    # ファイルシステム
-    tree \
-    # その他
-    zip unzip file \
+    # フォント
+    fonts-noto-cjk \
+    # Python
+    python3 python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 # Node.js 24
