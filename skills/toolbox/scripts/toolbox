@@ -3,6 +3,12 @@ set -euo pipefail
 
 IMAGE="claude-toolbox"
 
+# Docker の起動確認
+if ! docker info >/dev/null 2>&1; then
+  echo "エラー: Docker が起動していません。Docker を起動してから再実行してください。" >&2
+  exit 1
+fi
+
 # オプションを収集
 COMMIT=false
 ROOT=false
