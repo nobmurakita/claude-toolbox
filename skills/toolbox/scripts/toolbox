@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-IMAGE="sandbox-tools"
+IMAGE="claude-toolbox"
 
 # オプションを収集
 COMMIT=false
@@ -26,7 +26,7 @@ while [[ "$1" == --* ]]; do
 done
 
 if [[ "$COMMIT" == true ]]; then
-  CONTAINER="sandbox-tools-$$"
+  CONTAINER="toolbox-$$"
   docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
   docker commit "$CONTAINER" "$IMAGE"
   docker rm "$CONTAINER"
