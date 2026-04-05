@@ -67,13 +67,15 @@ docker rmi claude-toolbox
 ```
 claude-toolbox/
 ├── install.sh
-├── skills/
-│   └── toolbox/
-│       ├── SKILL.md
-│       └── scripts/
-│           └── toolbox
-└── docker/
-    └── Dockerfile
+├── LICENSE
+└── skills/
+    └── toolbox/
+        ├── SKILL.md
+        ├── scripts/
+        │   ├── toolbox
+        │   └── rebuild
+        └── docker/
+            └── Dockerfile
 ```
 
 ## ライセンス
