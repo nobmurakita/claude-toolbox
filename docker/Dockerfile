@@ -8,14 +8,24 @@ ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/game
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # Python
     python3 python3-pip \
+    # Node.js
+    nodejs npm \
     # 基本ツール
     curl wget jq git \
     # PDF
     poppler-utils ghostscript qpdf \
     # 画像・動画
-    ffmpeg imagemagick \
+    ffmpeg imagemagick librsvg2-bin \
     # フォント
     fonts-noto-cjk \
+    # ドキュメント変換
+    pandoc \
+    # グラフ描画
+    graphviz \
+    # データベース
+    sqlite3 \
+    # ファイルシステム
+    tree \
     # その他
     zip unzip file \
     && rm -rf /var/lib/apt/lists/*
@@ -29,7 +39,11 @@ RUN pip install --no-cache-dir \
     pillow matplotlib seaborn plotly kaleido \
     # Web・スクレイピング
     requests beautifulsoup4 \
+    # 機械学習
+    scikit-learn \
+    # グラフ解析
+    networkx \
     # テキスト・テンプレート
-    jinja2 pyyaml tabulate chardet
+    jinja2 pyyaml tabulate chardet markdown rich
 
 WORKDIR /work/pwd

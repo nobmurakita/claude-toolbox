@@ -27,10 +27,14 @@ curl -fsSL https://raw.githubusercontent.com/nobmurakita/claude-toolbox/main/ins
 
 ## プリインストール済みツール
 
-- **Python 3**: pandas, numpy, scipy, matplotlib, seaborn, plotly, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, kaleido
+- **Python 3**: pandas, numpy, scipy, scikit-learn, networkx, matplotlib, seaborn, plotly, kaleido, openpyxl, xlsxwriter, pillow, requests, beautifulsoup4, pdfplumber, python-pptx, lxml, jinja2, pyyaml, tabulate, chardet, markdown, rich
 - **PDF**: poppler-utils (pdftotext, pdfimages, pdftoppm), ghostscript, qpdf
-- **画像・動画**: ffmpeg, imagemagick
-- **基本ツール**: curl, wget, jq, git, zip, unzip, file
+- **画像・動画**: ffmpeg, imagemagick, rsvg-convert (librsvg)
+- **ドキュメント変換**: pandoc
+- **グラフ描画**: graphviz (dot, neato, etc.)
+- **データベース**: sqlite3
+- **Node.js**: nodejs, npm
+- **基本ツール**: curl, wget, jq, git, zip, unzip, file, tree
 - **フォント**: Noto Sans CJK
 
 追加ツールは `--commit` オプションで永続的にインストールできます。
