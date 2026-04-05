@@ -5,7 +5,7 @@ description: |-
   PDF操作、画像変換、データ処理、Python、Node.js など用途を問わない。
   ローカル環境を汚さずに実行するためDockerコンテナで隔離して実行する。
 allowed-tools:
-  - Bash(*/.claude/skills/toolbox/scripts/toolbox *)
+  - Bash(*/.claude/skills/toolbox/scripts/*)
 ---
 
 # Toolbox
