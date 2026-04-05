@@ -5,14 +5,11 @@ IMAGE="claude-toolbox"
 
 # オプションを収集
 COMMIT=false
+ROOT=false
 DOCKER_OPTS=()
 DIR_COUNT=0
 while [[ "${1:-}" == --* ]]; do
   case "$1" in
-    --commit)
-      COMMIT=true
-      shift
-      ;;
     --dir)
       shift
       DIR_PATH="${1:?--dir にはパスを指定してください}"
@@ -24,17 +21,29 @@ while [[ "${1:-}" == --* ]]; do
       DOCKER_OPTS+=(-v "$DIR_PATH:/work/dir${DIR_COUNT}")
       shift
       ;;
+    --root)
+      ROOT=true
+      shift
+      ;;
+    --commit)
+      COMMIT=true
+      shift
+      ;;
     *)
       break
       ;;
   esac
 done
 
+if [[ "$ROOT" == false ]]; then
+  DOCKER_OPTS+=(--user "$(id -u):$(id -g)")
+fi
+
 if [[ "$COMMIT" == true ]]; then
   CONTAINER="toolbox-$(head -c8 /dev/urandom | od -An -tx1 | tr -d ' \n')"
+  trap 'docker rm "$CONTAINER" 2>/dev/null' EXIT
   docker run --name "$CONTAINER" -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
   docker commit "$CONTAINER" "$IMAGE"
-  docker rm "$CONTAINER"
 else
   docker run --rm -i -v "$(pwd):/work/pwd" "${DOCKER_OPTS[@]}" "$IMAGE" "$@"
 fi
