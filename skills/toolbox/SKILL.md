@@ -2,7 +2,7 @@
 name: toolbox
 description: 一時的な作業でローカル環境にないツールをDockerコンテナで実行する。Python、PDF操作、画像変換、データ処理、スクレイピングなど用途を問わない。
 allowed-tools:
-  - Bash(${CLAUDE_SKILL_DIR}/scripts/toolbox *)
+  - Bash(*/.claude/skills/toolbox/scripts/toolbox *)
   - Bash(docker *)
 ---
 
