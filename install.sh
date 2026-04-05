@@ -28,17 +28,15 @@ curl -fsSL "$REPO/skills/toolbox/scripts/toolbox" \
 chmod +x ~/.claude/skills/toolbox/scripts/toolbox
 echo "✅ toolbox スクリプトをインストールしました"
 
+# Dockerfile をインストール
+mkdir -p ~/.claude/skills/toolbox/docker
+curl -fsSL "$REPO/skills/toolbox/docker/Dockerfile" \
+  -o ~/.claude/skills/toolbox/docker/Dockerfile
+echo "✅ Dockerfile をインストールしました"
+
 # Dockerイメージをビルド
-docker rmi claude-toolbox 2>/dev/null || true
 echo "🐳 Dockerイメージをビルドしています..."
-TMPDIR=$(mktemp -d)
-trap 'rm -rf "$TMPDIR"' EXIT
-curl -fsSL "$REPO/docker/Dockerfile" -o "$TMPDIR/Dockerfile"
-if docker buildx version &> /dev/null; then
-  docker buildx build -t claude-toolbox "$TMPDIR"
-else
-  docker build -t claude-toolbox "$TMPDIR"
-fi
+~/.claude/skills/toolbox/scripts/rebuild
 echo "✅ Dockerイメージをビルドしました"
 
 echo "🎉 インストール完了！"

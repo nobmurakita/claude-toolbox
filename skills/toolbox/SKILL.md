@@ -83,6 +83,13 @@ ${CLAUDE_SKILL_DIR}/scripts/toolbox --root --commit bash -c "apt-get update && a
 ${CLAUDE_SKILL_DIR}/scripts/toolbox --root --commit pip install パッケージ名
 ```
 
+## イメージの再ビルド
+
+追加インストールをリセットしてプリインストール状態に戻したい場合、再ビルドする:
+```bash
+${CLAUDE_SKILL_DIR}/scripts/rebuild
+```
+
 ## 日本語フォント
 
 コンテナには Noto Sans CJK がインストール済み。matplotlib で日本語を使う場合:

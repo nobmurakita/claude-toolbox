@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+IMAGE="claude-toolbox"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+DOCKER_DIR="$SCRIPT_DIR/../docker"
+
+if ! docker info >/dev/null 2>&1; then
+  echo "エラー: Docker が起動していません。Docker を起動してから再実行してください。" >&2
+  exit 1
+fi
+
+docker rmi "$IMAGE" 2>/dev/null || true
+
+if docker buildx version &>/dev/null; then
+  docker buildx build -t "$IMAGE" "$DOCKER_DIR"
+else
+  docker build -t "$IMAGE" "$DOCKER_DIR"
+fi
