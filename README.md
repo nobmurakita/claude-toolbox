@@ -1,4 +1,4 @@
-# toolbox
+# Claude Toolbox
 
 Claude Code でローカル環境を汚さずにツールやスクリプトを実行するスキルです。
 
@@ -59,3 +59,7 @@ claude-toolbox/
 └── docker/
     └── Dockerfile
 ```
+
+## ライセンス
+
+[MIT License](LICENSE)
