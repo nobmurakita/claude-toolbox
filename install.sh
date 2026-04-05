@@ -29,6 +29,7 @@ chmod +x ~/.claude/skills/toolbox/scripts/toolbox
 echo "✅ toolbox スクリプトをインストールしました"
 
 # Dockerイメージをビルド
+docker rmi claude-toolbox 2>/dev/null || true
 echo "🐳 Dockerイメージをビルドしています..."
 TMPDIR=$(mktemp -d)
 trap 'rm -rf "$TMPDIR"' EXIT
