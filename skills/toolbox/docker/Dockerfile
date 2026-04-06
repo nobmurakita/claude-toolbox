@@ -5,9 +5,6 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
-# キャッシュディレクトリの書き込み権限を付与
-RUN chmod -R 777 /var/cache
-
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基本ツール
     ca-certificates curl wget jq git gnupg zip unzip file tree \
@@ -25,7 +22,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     fonts-noto-cjk \
     # Python
     python3 python3-pip \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && chmod -R 777 /var/cache/fontconfig
 
 # Node.js 24
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
