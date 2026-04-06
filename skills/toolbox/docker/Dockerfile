@@ -5,6 +5,9 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 ENV PIP_BREAK_SYSTEM_PACKAGES=1
 ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games"
 
+# キャッシュディレクトリの書き込み権限を付与
+RUN chmod -R 777 /var/cache
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     # 基本ツール
     ca-certificates curl wget jq git gnupg zip unzip file tree \
