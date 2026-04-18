@@ -35,6 +35,12 @@ while [[ "${1:-}" == --* ]]; do
       COMMIT=true
       shift
       ;;
+    --memory)
+      shift
+      MEMORY="${1:?--memory にはサイズを指定してください (例: 4g, 512m)}"
+      DOCKER_OPTS+=(--memory "$MEMORY")
+      shift
+      ;;
     --)
       shift
       break

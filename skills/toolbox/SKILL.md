@@ -32,12 +32,13 @@ allowed-tools:
 ## 実行コマンド
 
 ```
-${CLAUDE_SKILL_DIR}/scripts/toolbox [--dir <path>]... [--root] [--commit] <command> [args...]
+${CLAUDE_SKILL_DIR}/scripts/toolbox [--dir <path>]... [--root] [--commit] [--memory <size>] <command> [args...]
 ```
 
 - `--dir <path>`: 追加ディレクトリをマウントする（指定順に `/work/dir1`, `/work/dir2`, ...）
 - `--root`: root 権限で実行する（パッケージのインストール等に必要）
 - `--commit`: コマンド実行後にイメージを更新する（docker commit）
+- `--memory <size>`: メモリ上限を指定する（例: `4g`, `512m`）。通常は不要で、メモリ不足で失敗したときに使用する
 
 
 実行例:
