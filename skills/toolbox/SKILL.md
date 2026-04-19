@@ -1,9 +1,9 @@
 ---
 name: toolbox
 description: |-
-  ツールやライブラリを用いた一時的な作業の際に使用する。
-  PDF操作、画像変換、データ処理、Python、Node.js など用途を問わない。
-  ローカル環境を汚さずに実行するためDockerコンテナで隔離して実行する。
+  一時的な作業にローカル環境にないツールやライブラリが必要な場合に使用する。
+  ローカル環境を汚さないためにDockerコンテナ内のツールを使用して作業を行う。
+  Python、Node.js の書き捨てのスクリプト実行、PDF操作、画像変換、データ処理など用途を問わない。
 allowed-tools:
   - Bash(*/.claude/skills/toolbox/scripts/*)
 ---
