@@ -9,6 +9,29 @@ if ! docker info >/dev/null 2>&1; then
   exit 1
 fi
 
+# Windows (Git Bash / MSYS / Cygwin) 判定
+IS_WINDOWS=false
+case "$(uname -s)" in
+  MINGW*|MSYS*|CYGWIN*) IS_WINDOWS=true ;;
+esac
+
+# Windows では MSYS のパス自動変換を無効化する。
+# 無効化しないと -v の右側 (/work/pwd など) が Windows パスに変換されてしまう。
+if [[ "$IS_WINDOWS" == true ]]; then
+  export MSYS_NO_PATHCONV=1
+  export MSYS2_ARG_CONV_EXCL='*'
+fi
+
+# ホストパスを Docker が解釈できる形式に変換する。
+# Windows の Git Bash の /c/Users/... 形式は Docker for Windows が解釈できないため C:/Users/... 形式にする。
+to_host_path() {
+  if [[ "$IS_WINDOWS" == true ]] && command -v cygpath >/dev/null 2>&1; then
+    cygpath -m "$1"
+  else
+    echo "$1"
+  fi
+}
+
 # オプションを収集
 COMMIT=false
 ROOT=false
@@ -24,7 +47,8 @@ while [[ "${1:-}" == --* ]]; do
         exit 1
       fi
       DIR_COUNT=$((DIR_COUNT + 1))
-      DOCKER_OPTS+=(-v "$DIR_PATH:/work/dir${DIR_COUNT}")
+      DIR_ABS="$(cd "$DIR_PATH" && pwd)"
+      DOCKER_OPTS+=(-v "$(to_host_path "$DIR_ABS"):/work/dir${DIR_COUNT}")
       shift
       ;;
     --root)
@@ -59,12 +83,12 @@ fi
 if [[ "$COMMIT" == true ]]; then
   CONTAINER="toolbox-$(head -c8 /dev/urandom | od -An -tx1 | tr -d ' \n')"
   trap 'docker rm "$CONTAINER" 2>/dev/null' EXIT
-  if docker run -i --name "$CONTAINER" -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"; then
+  if docker run -i --name "$CONTAINER" -v "$(to_host_path "$(pwd)"):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"; then
     docker commit "$CONTAINER" "$IMAGE"
   else
     echo "エラー: コマンドが失敗したためイメージを更新しません" >&2
     exit 1
   fi
 else
-  docker run --rm -i -v "$(pwd):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
+  docker run --rm -i -v "$(to_host_path "$(pwd)"):/work/pwd" ${DOCKER_OPTS[@]+"${DOCKER_OPTS[@]}"} "$IMAGE" "$@"
 fi
